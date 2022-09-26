@@ -17,13 +17,13 @@ public class ChooseGame {
 
     //gett one games
 
-    public Game displayGameCategory(Integer i){
+    public Game displayGameCategory(int i){
 
         //display
         if(i == 1)
-            System.out.println("------------------------ Football-Games ------------------------");
+            System.out.println(" ************************ Football-Games ************************ ");
         else
-            System.out.println("------------------------  Guerre-Games  ------------------------");
+            System.out.println(" ************************ Guerre-Games ************************ ");
 
         //display games
 

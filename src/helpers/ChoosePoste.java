@@ -2,11 +2,14 @@ package helpers;
 
 import gamespace.Poste;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ChoosePoste {
     ArrayList<Poste> postes = new ArrayList<>();
+
+
 
     public ChoosePoste(){
         this.postes.add(new Poste(1,"Xbox......  =======>  DELL....."));
@@ -24,15 +27,23 @@ public class ChoosePoste {
     choose from available poste
      */
     public Poste chooseOnePoste(){
+        System.out.println(" ************************ Postes-Available ************************ ");
         for(int i=0 ; i<this.postes.size() ; i++ ){
-            if(!this.postes.get(i).getPosteAvailable()){
+            if(this.postes.get(i).getPosteAvailable()){
                 System.out.println(i+" : "+this.postes.get(i).getNamePoste());
+            }else{
+                System.out.println(i+" : This Poste Not Available until => "+this.postes.get(i).getDateEnd());
             }
 
         }
         System.out.println("Enter the number of Available Poste : ");
         Scanner sc = new Scanner(System.in);
         int number = Integer.parseInt(sc.nextLine());
+        this.postes.get(number).setPosteAvailable();
         return this.postes.get(number);
     }
+
+    //setDateend
+
+
 }

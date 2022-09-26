@@ -2,7 +2,6 @@ package gamespace;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
 public class Horaire {
@@ -36,9 +35,16 @@ public class Horaire {
         return formattedDate;
     }
 
-    public void getDiffDate(){
-        this.diffDate = Duration.between(this.timeOfStart,this.timeOfEnd);
-        System.out.println("Minutes .............. : " + this.diffDate.toMinutes() +" minutes Vous reste !!!");
+    public int getDiffDate(){
+
+        this.diffDate = Duration.between(LocalDateTime.now(),this.timeOfEnd);
+        int minutes = (int) this.diffDate.toMinutes();
+       // System.out.println("Minutes .............. : " + this.diffDate.toMinutes() +" minutes Vous reste !!!");
+        return minutes;
     }
+
+    //getters
+
+
 }
 

@@ -8,7 +8,7 @@ public class ChooseCategorie {
     public Integer categorieNumber(){
         int number;
         Scanner sc = new Scanner(System.in);
-        System.out.println("******************** Choose Category : ********************");
+        System.out.println(" ************************ Choose Category : ************************ ");
         System.out.println("Tape 1 : Football");
         System.out.println("Tape 2 : Guerre");
         do {

@@ -1,48 +1,66 @@
 import gamespace.*;
-import helpers.ChooseCategorie;
-import helpers.ChooseGame;
-import helpers.ChooseHour;
-import helpers.ChoosePoste;
+import helpers.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
 
     public static void main(String[] args) {
-        ChooseCategorie chooseCategory = new ChooseCategorie();
-        ChoosePoste poste = new ChoosePoste();
-
+        //declaration
+        int choix1,minutes;
         String firstName,lastName;
+        Poste poste = new Poste();
+        Game game = new Game();
         double price;
-        ChooseHour chooseHour = new ChooseHour();
+
+        ChoosePoste choosePoste = new ChoosePoste();
         ChooseGame chooseGame = new ChooseGame();
+        ChooseHour chooseHour = new ChooseHour();
+        ChooseCategorie chooseCategory = new ChooseCategorie();
+        ChoosePrice choosePrice = new ChoosePrice();
+        ArrayList<Reservation> reservations = new ArrayList<>();
+
+
         do{
-            //choose category
-            int categoryNumber = chooseCategory.categorieNumber() ;
-            //fill player infos
+            System.out.println(" ************************ Here we gO ************************ ");
+            System.out.println("Tape (1) For Reservation ........ :");
+            System.out.println("Tape (2) For Display all ........ :");
+            System.out.println("Tape (3) To Get TotalPrice ...... :");
             Scanner sc = new Scanner(System.in);
-            System.out.println("Your firstname : ");
-            firstName = sc.nextLine();
+            choix1 = Integer.parseInt(sc.nextLine());
+            switch (choix1){
+                case 1:
+                    //player infos
+                    System.out.println("Your FirstName ......... : ");
+                    firstName = sc.nextLine();
+                    System.out.println("Your LaststName .......... : ");
+                    lastName = sc.nextLine();
+                    Player player = new Player(firstName,lastName);
+                    //choix du poste
+                       poste = choosePoste.chooseOnePoste();//
+                    //choix du game
+                    game = chooseGame.displayGameCategory(chooseCategory.categorieNumber());
+                    //choix d'heure
+                     minutes = chooseHour.getMinutes();
+                        Horaire heure = new Horaire(minutes);
+                     //reservation
+                        price =(double) choosePrice.getPrice(minutes);
+                        reservations.add(new Reservation(player,poste,heure,game,price));
 
-            System.out.println("Your lastName : ");
-            lastName = sc.nextLine();
-
-            Player player = new Player(firstName,lastName);
-            //choose Game
-            System.out.println("enter price");
-            price = Double.parseDouble(sc.nextLine());
-            int minutes = chooseHour.getMinutes();
-            Horaire hours = new Horaire(minutes);
-            Game game = new Game(chooseGame.displayGameCategory(categoryNumber).getNameOfGame());
-            System.out.println(game.getNameOfGame());
-
-            //reservation
-            Reservation reservation = new Reservation(player,poste.chooseOnePoste(),hours,game,price);
-            reservation.showInfos();
-
-
-
+                    break;
+                case 2 :
+                    for(int i=0 ; i<reservations.size() ; i++){
+                        System.out.println(" ************************ Player "+(i+1)+" ************************ ");
+                        reservations.get(i).showInfos();
+                    }
+                    break;
+                default:
+                    System.out.println(" ************************ Total ************************ ");
+                    System.out.println("Revenue : "+Reservation.PRICE+" DH");
+                    break;
+            }
 
         }while(true);
     }

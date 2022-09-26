@@ -1,5 +1,6 @@
 package gamespace;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class Poste {
@@ -7,13 +8,16 @@ public class Poste {
     private Integer numPoste;
     private boolean posteAvailable;
 
+    private String dateEnd ;
+
 /*
 Constructor
  */
+    public Poste(){}
     public Poste(Integer i ,String nameOfePoste){
         this.numPoste = i;
         this.namePoste = nameOfePoste;
-        this.posteAvailable = false;
+        this.posteAvailable = true;
     }
 
     /*
@@ -35,5 +39,11 @@ Constructor
     public Integer getNumPoste(){return this.numPoste;}
     public String getNamePoste(){return this.namePoste;}
 
-    public void setPosteAvailable(){this.posteAvailable = true ;}
+    public void setPosteAvailable(){this.posteAvailable = false ;}
+    public void setPosteNonAvailable(){this.posteAvailable = true;}
+
+    //setters of date end occupation of poste
+    public void setDateEnd(String l){this.dateEnd = l;}
+    public String getDateEnd(){return this.dateEnd;}
 }
+

@@ -3,6 +3,7 @@ package gamespace;
 public class Game {
     private String nameOfGame ;
 
+    public Game(){}
     public Game(String nGame){
         this.nameOfGame = nGame;
     }

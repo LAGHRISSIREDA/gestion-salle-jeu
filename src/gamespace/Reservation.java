@@ -1,13 +1,20 @@
 package gamespace;
 
-public class Reservation {
+import javax.swing.*;
+import java.time.LocalDateTime;
+import java.util.TimerTask;
+
+
+public class Reservation  {
     private Player player;
     private Poste poste;
-    private Horaire hour;
+    public Horaire hour;
     private Game game;
 
     private double price;
     public static double PRICE = 0;
+
+
 
     public Reservation(){}
     public Reservation(Player pl,Poste po,Horaire h,Game g,double p){
@@ -20,20 +27,29 @@ public class Reservation {
         this.poste.setDateEnd(this.hour.getTimeOfEnd());
     }
 
+    //get start hour
+    public LocalDateTime getStartDate(){return this.hour.getStartDate();}
+
+    //run function every seconde to check
+
+    public int returnMinute(){
+        int numberMinute = this.hour.getDiffDate();
+        if(numberMinute <= 0){
+            this.poste.setPosteNonAvailable();
+            //  JOptionPane.showMessageDialog(null, this.poste.getNamePoste()+" is available Now");
+            numberMinute = 0;
+        }
+        return numberMinute;
+    }
     /*
     Show infos about one reservation for a player X
      */
     public void showInfos(){
-        int numberMinute = this.hour.getDiffDate();
-        if(numberMinute <= 0){
-            this.poste.setPosteNonAvailable();
-            numberMinute = 0;
-        }
-
+        int numberMinute = returnMinute();
         System.out.println("Code's Player ........ : "+this.player.getCodePlayer());
         System.out.println("Player's FirstName ... : "+this.player.getFirstNamePlayer());
         System.out.println("Player's LastName .... : "+this.player.getLastNamePlayer());
-        System.out.println("Poste's Number ....... : "+this.poste.getNumPoste());
+        System.out.println("Poste's Number ....... : "+(this.poste.getNumPoste()-1));
         System.out.println("Name's Number ........ : "+this.poste.getNamePoste());
         System.out.println("Hour Of Start Game ... : "+this.hour.getTimeOfStart());
         System.out.println("Hour Of End   Game ... : "+this.hour.getTimeOfEnd());

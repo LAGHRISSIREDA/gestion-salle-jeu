@@ -35,6 +35,9 @@ public class Horaire {
         return formattedDate;
     }
 
+    //gettime end
+    public LocalDateTime getStartDate(){return this.timeOfStart;}
+
     public int getDiffDate(){
 
         this.diffDate = Duration.between(LocalDateTime.now(),this.timeOfEnd);

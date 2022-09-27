@@ -25,17 +25,26 @@ public class ChoosePoste {
 
     /*
     choose from available poste
+    and display postes
      */
-    public Poste chooseOnePoste(){
-        System.out.println(" ************************ Postes-Available ************************ ");
+
+    public void displayPoste(){
         for(int i=0 ; i<this.postes.size() ; i++ ){
             if(this.postes.get(i).getPosteAvailable()){
-                System.out.println(i+" : "+this.postes.get(i).getNamePoste());
+                Log.i(i+" : "+this.postes.get(i).getNamePoste());
+                //System.out.println(i+" : "+this.postes.get(i).getNamePoste());
             }else{
-                System.out.println(i+" : This Poste Not Available until => "+this.postes.get(i).getDateEnd());
+                Log.e(i+" : This Poste Not Available until => "+this.postes.get(i).getDateEnd());
+                // System.out.println(i+" : This Poste Not Available until => "+this.postes.get(i).getDateEnd());
             }
 
         }
+    }
+
+    public Poste chooseOnePoste(){
+
+        System.out.println(" ************************ Postes-Available ************************ ");
+         displayPoste();
         System.out.println("Enter the number of Available Poste : ");
         Scanner sc = new Scanner(System.in);
         int number = Integer.parseInt(sc.nextLine());
@@ -43,7 +52,9 @@ public class ChoosePoste {
         return this.postes.get(number);
     }
 
+
     //setDateend
+
 
 
 }
